@@ -20,4 +20,5 @@ func _process(delta):
 
 
 func _on_play_button_pressed():
+	hide()
 	launch_game.emit()

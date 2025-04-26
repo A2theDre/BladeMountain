@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbs3fbtjr1xqk"]
+
+[ext_resource type="Script" path="res://scripts/city.gd" id="1_ofnnf"]
+[ext_resource type="Texture2D" uid="uid://bh1urh24umtjk" path="res://assets/city_placeholder.png" id="1_rwr1f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igi1m"]
+size = Vector2(16, 16)
+
+[node name="City" type="Node2D" node_paths=PackedStringArray("city_entrance")]
+script = ExtResource("1_ofnnf")
+city_entrance = NodePath("CityEntranceArea2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rwr1f")
+
+[node name="CityEntranceArea2D" type="Area2D" parent="."]
+
+[node name="CityEntranceCollider" type="CollisionShape2D" parent="CityEntranceArea2D"]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_igi1m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24, -24, 8, -8, 8, -8, -8, -24, -8)
+
+[connection signal="body_entered" from="CityEntranceArea2D" to="." method="_on_city_area_entered"]
